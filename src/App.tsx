@@ -1,34 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import classNames from 'classnames';
+import {useMeditationSession} from './hooks/useMeditationSession';
+
+const MINUTE = 60 * 1000;
+const SESSION_DURATION = import.meta.env.VITE_SESSION_DURATION_IN_MINUTES * MINUTE;
 
 function App() {
-  const [count, setCount] = useState(0)
+  const {startSession, sessionInProgress} = useMeditationSession(SESSION_DURATION);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div
+      className={classNames("w-full h-screen", {
+        "bg-orange-600": !sessionInProgress,
+        "bg-black": sessionInProgress
+      })}
+      onClick={startSession}
+    >
+    </div>
   )
 }
 
