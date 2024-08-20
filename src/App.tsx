@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div
-      className={classNames("w-full h-screen", {
+      className={classNames("w-full h-dvh", {
         "bg-orange-600": !sessionInProgress,
         "bg-black": sessionInProgress
       })}
